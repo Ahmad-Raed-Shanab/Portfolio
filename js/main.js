@@ -51,21 +51,28 @@ function scrollToSection() {
 }
 
 let span = document.querySelector(".up");
+let section = document.querySelector(".skills-sec");
+let spans = document.querySelectorAll(".progress .progress-bar");
 
 window.onscroll = function () {
-//   console.log(this.scrollY);
-  // if (this.scrollY >= 1000) {
-  //   span.classList.add("show");
-  // } else {
-  //   span.classList.remove("show");
-  // }
-    this.scrollY >= 720 ? span.classList.add("show") : span.classList.remove("show");
+    if (this.scrollY >= 720) {
+        span.classList.add("show");
+    } else {
+        span.classList.remove("show");
+    }
+
+    if (this.scrollY >= section.offsetTop - 180) {
+        console.log("Reached Section Three");
+        spans.forEach((span) => {
+            span.style.width = span.dataset.width;
+        });
+    }
 };
 
 span.onclick = function () {
     window.scrollTo({
-    top: 0,
-    behavior: "smooth",
+        top: 0,
+        behavior: "smooth",
     });
 };
 
@@ -82,14 +89,3 @@ window.addEventListener("scroll", () => {
 });
 
 
-let section = document.querySelector(".skills-sec");
-let spans = document.querySelectorAll(".progress .progress-bar");
-
-window.onscroll = function () {
-  if (window.scrollY >= section.offsetTop - 180) {
-    console.log("Reached Section Three");
-    spans.forEach((span) => {
-      span.style.width = span.dataset.width;
-    });
-  }
-};
